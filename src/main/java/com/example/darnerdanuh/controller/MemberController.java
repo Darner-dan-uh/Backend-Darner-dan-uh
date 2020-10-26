@@ -1,9 +1,11 @@
 package com.example.darnerdanuh.controller;
 
+import com.example.darnerdanuh.domain.ResponseJson;
 import com.example.darnerdanuh.domain.member.Member;
 import com.example.darnerdanuh.domain.member.MemberDto;
 import com.example.darnerdanuh.domain.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.json.JSONObject;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,11 +19,14 @@ public class MemberController {
     final PasswordEncoder encode;
 
     @PostMapping("/signup")
-    public String saveMember(@RequestBody MemberDto memberDto){
+    public ResponseJson saveMember(@RequestBody MemberDto memberDto){
         memberRepository.save(Member.createMember(memberDto.getUserId(),
                 memberDto.getName(), memberDto.getEmail(),
                 encode.encode(memberDto.getPassword())));
 
-        return "success";
+        ResponseJson json = new ResponseJson();
+        json.setMessage("success");
+
+        return json;
     }
 }
