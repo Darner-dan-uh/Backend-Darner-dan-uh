@@ -1,4 +1,5 @@
 package com.example.darnerdanuh.config;
+
 import org.json.JSONObject;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;

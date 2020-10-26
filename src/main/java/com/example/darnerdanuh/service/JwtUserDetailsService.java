@@ -27,23 +27,23 @@ public class JwtUserDetailsService implements UserDetailsService {
     private MemberRepository memberRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException{
+    public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
         Member member = memberRepository.findByUserId(userId)
                 .orElseThrow(() -> new UsernameNotFoundException(userId));
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
         grantedAuthorities.add(new SimpleGrantedAuthority(Role.USER.getValue()));
-        if(userId.equals("dndn2100")){
+        if (userId.equals("dndn2100")) {
             grantedAuthorities.add(new SimpleGrantedAuthority(Role.ADMIN.getValue()));
         }
 
         return new User(member.getUserId(), member.getPassword(), grantedAuthorities);
     }
 
-    public Member authenticateByUserIdAndPassword(String userId, String password){
+    public Member authenticateByUserIdAndPassword(String userId, String password) {
         Member member = memberRepository.findByUserId(userId)
                 .orElseThrow(() -> new UsernameNotFoundException(userId));
 
-        if(!passwordEncoder.matches(password, member.getPassword())){
+        if (!passwordEncoder.matches(password, member.getPassword())) {
             throw new BadCredentialsException("Password not matched");
         }
 

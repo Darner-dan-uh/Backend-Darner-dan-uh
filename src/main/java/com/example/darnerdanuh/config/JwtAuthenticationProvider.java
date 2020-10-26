@@ -28,7 +28,7 @@ public class JwtAuthenticationProvider implements AuthenticationProvider {
 
         Member member = memberRepository.findByUserId(userId).orElseThrow(() -> new UsernameNotFoundException(userId));
 
-        if(passwordEncoder.matches(member.getPassword(), password)) {
+        if (passwordEncoder.matches(member.getPassword(), password)) {
             throw new BadCredentialsException("UnAuthorized");
         }
 
