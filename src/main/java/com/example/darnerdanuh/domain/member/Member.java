@@ -25,6 +25,7 @@ public class Member {
     private String name;
     private String email;
     private String password;
+    private boolean permitted = false;
 
     public Member(String userId, String name, String email, String password) {
         this.userId = userId;
