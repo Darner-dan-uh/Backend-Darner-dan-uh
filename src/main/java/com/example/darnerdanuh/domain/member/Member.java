@@ -1,15 +1,13 @@
 package com.example.darnerdanuh.domain.member;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity(name = "member")
 @Getter
-@ToString
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Member {
 
@@ -26,15 +24,17 @@ public class Member {
     private String email;
     private String password;
     private boolean permitted = false;
+    private String verifyCode;
 
-    public Member(String userId, String name, String email, String password) {
-        this.userId = userId;
-        this.name = name;
-        this.email = email;
-        this.password = password;
+    public Member verifyCodeUpdate(String verifyCode) {
+        this.verifyCode = verifyCode;
+
+        return this;
     }
 
-    public static Member createMember(String userId, String name, String email, String password) {
-        return new Member(userId, name, email, password);
+    public Member permittedUpdate(boolean permitted) {
+        this.permitted = permitted;
+
+        return this;
     }
 }
