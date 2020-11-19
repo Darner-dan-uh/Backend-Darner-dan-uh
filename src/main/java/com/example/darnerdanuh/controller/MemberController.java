@@ -7,6 +7,7 @@ import com.example.darnerdanuh.service.SignUpService;
 import com.example.darnerdanuh.service.VerifyCodeService;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
