@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface WordRepository extends JpaRepository<Word, Long> {
 
-    @Query(value="SELECT * FROM word_test ORDER BY RAND()", nativeQuery = true)
+    @Query(value="SELECT * FROM word ORDER BY RAND()", nativeQuery = true)
     List<Word> findByWord_id(int word_id);
 }
