@@ -25,6 +25,13 @@ public class Member {
     private String password;
     private boolean permitted = false;
     private String verifyCode;
+    private boolean passwordVerify = false;
+
+    public Member passwordVerifyUpdate(boolean passwordVerify) {
+        this.passwordVerify = passwordVerify;
+
+        return this;
+    }
 
     public Member verifyCodeUpdate(String verifyCode) {
         this.verifyCode = verifyCode;
