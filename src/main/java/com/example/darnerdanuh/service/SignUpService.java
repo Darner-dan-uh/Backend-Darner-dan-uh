@@ -20,6 +20,7 @@ public class SignUpService {
 
     @SneakyThrows
     public ResponseJson signUp(MemberDto memberDto) {
+        System.out.println(memberDto.getUserId());
         Member member = memberRepository.save(
                 Member.builder()
                         .email(memberDto.getEmail())
