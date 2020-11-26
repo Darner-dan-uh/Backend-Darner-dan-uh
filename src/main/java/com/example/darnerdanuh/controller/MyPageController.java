@@ -16,7 +16,7 @@ public class MyPageController {
     private MemberRepository memberRepository;
 
     @GetMapping("/user/profile")
-    public Object getProfile(Principal principal){
+    public String getProfile(Principal principal){
 
         String name = memberRepository.findByUserIdToName(principal.getName());
         String userId = memberRepository.findByUserIdToId(principal.getName());
