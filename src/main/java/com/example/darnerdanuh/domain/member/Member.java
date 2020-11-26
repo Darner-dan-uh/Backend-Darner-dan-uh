@@ -25,6 +25,19 @@ public class Member {
     private String password;
     private boolean permitted = false;
     private String verifyCode;
+    private boolean passwordVerify = false;
+
+    public Member nameUpdate(String name){
+        this.name = name;
+
+        return this;
+    }
+
+    public Member passwordVerifyUpdate(boolean passwordVerify) {
+        this.passwordVerify = passwordVerify;
+
+        return this;
+    }
 
     @Column(name = "word_cnt")
     private int wordCnt = 0;

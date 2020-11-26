@@ -4,25 +4,67 @@ package com.example.darnerdanuh.controller;
 import com.example.darnerdanuh.domain.member.Member;
 import com.example.darnerdanuh.domain.member.MemberDto;
 import com.example.darnerdanuh.domain.member.MemberRepository;
-import com.example.darnerdanuh.domain.member.MyPageDto;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.*;
 
+import javax.swing.text.html.Option;
+import java.security.Principal;
 import java.util.Optional;
 
-// 닉네임 비밀번호만 보여줌.,
 @RestController
 public class MyPageController {
 
-    MemberRepository memberRepository;
+    @Autowired
+    private MemberRepository memberRepository;
 
-    MyPageDto myPageDto;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
-    @GetMapping("/mypage/profile")
-    public Object getProfile(@RequestBody MemberDto memberDto){
-        Optional<Member> member = memberRepository.findByUserId(memberDto.getUserId());
+    @GetMapping("/user/profile")
+    public String getProfile(Principal principal){
 
-        return member;
+        String name = memberRepository.findByUserIdToName(principal.getName());
+        String userId = memberRepository.findByUserIdToId(principal.getName());
+
+        JSONObject result = new JSONObject();
+
+        result.put("userId", userId);
+        result.put("name", name);
+
+        return result.toString();
+    }
+
+    @PostMapping("/user/verifyPassword")
+    public ResponseEntity verifyPassword(@RequestBody MemberDto memberDto, Principal principal){
+
+        Member member = memberRepository.findByUserId(principal.getName()).orElseThrow(RuntimeException::new);
+
+        if(passwordEncoder.matches(memberDto.getPassword(), member.getPassword())){
+
+            memberRepository.save(member.passwordVerifyUpdate(true));
+
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        else{
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PatchMapping("/user/update")
+    public ResponseEntity updateProfile(@RequestBody MemberDto memberDto, Principal principal){
+
+        Member member = memberRepository.findByUserId(principal.getName()).orElseThrow(RuntimeException::new);
+
+        if(!member.isPasswordVerify()) return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+
+        memberRepository.save(member.nameUpdate(memberDto.getName()));
+
+        memberRepository.save(member.passwordVerifyUpdate(false));
+
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

@@ -17,7 +17,7 @@ public class VerifyCodeService {
         Member member = memberRepository.findByEmail(verifyInfo.getEmail())
                 .orElseThrow(RuntimeException::new);
 
-        System.out.println("Input : " + verifyInfo.email + " " + verifyInfo.code);
+        // System.out.println("Input : " + verifyInfo.email + " " + verifyInfo.code);
 
         if (member.getVerifyCode().equals(verifyInfo.code)) {
             isSuccess = true;
