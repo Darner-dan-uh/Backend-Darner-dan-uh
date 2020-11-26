@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.security.Principal;
 
-// 닉네임 비밀번호만 보여줌.,
 @RestController
 public class MyPageController {
 
