@@ -27,6 +27,12 @@ public class Member {
     private String verifyCode;
     private boolean passwordVerify = false;
 
+    public Member nameUpdate(String name){
+        this.name = name;
+
+        return this;
+    }
+
     public Member passwordVerifyUpdate(boolean passwordVerify) {
         this.passwordVerify = passwordVerify;
 

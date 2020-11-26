@@ -9,10 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.swing.text.html.Option;
 import java.security.Principal;
@@ -55,5 +52,17 @@ public class MyPageController {
         else{
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @PatchMapping("/user/update")
+    public ResponseEntity updateProfile(@RequestBody MemberDto memberDto, Principal principal){
+
+        Member member = memberRepository.findByUserId(principal.getName()).orElseThrow(RuntimeException::new);
+
+        if(!member.isPasswordVerify()) return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+
+        memberRepository.save(member.nameUpdate(memberDto.getName()));
+
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
