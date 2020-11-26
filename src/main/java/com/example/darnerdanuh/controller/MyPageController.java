@@ -63,6 +63,8 @@ public class MyPageController {
 
         memberRepository.save(member.nameUpdate(memberDto.getName()));
 
+        memberRepository.save(member.passwordVerifyUpdate(false));
+
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
