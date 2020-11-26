@@ -27,9 +27,6 @@ public class MyPageController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    //@Autowired
-    //private Member member;
-
     @GetMapping("/user/profile")
     public String getProfile(Principal principal){
 
@@ -45,7 +42,7 @@ public class MyPageController {
     }
 
     @PostMapping("/user/verifyPassword")
-    public Object verifyPassword(@RequestBody MemberDto memberDto, Principal principal){
+    public ResponseEntity verifyPassword(@RequestBody MemberDto memberDto, Principal principal){
 
         Member member = memberRepository.findByUserId(principal.getName()).orElseThrow(RuntimeException::new);
 
