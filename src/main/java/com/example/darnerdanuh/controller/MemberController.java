@@ -20,9 +20,7 @@ public class MemberController {
 
     private final SignUpService signUpService;
 
-    MemberRepository memberRepository;
-
-    @PostMapping("/signup")
+    @PostMapping("/register")
     public ResponseJson saveMember(@RequestBody MemberDto memberDto) {
         return signUpService.signUp(memberDto);
     }
