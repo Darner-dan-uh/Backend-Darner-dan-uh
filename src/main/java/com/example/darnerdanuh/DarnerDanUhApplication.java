@@ -1,5 +1,6 @@
 package com.example.darnerdanuh;
 
+import com.example.darnerdanuh.service.RankingService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
