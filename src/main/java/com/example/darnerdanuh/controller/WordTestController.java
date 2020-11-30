@@ -21,7 +21,6 @@ public class WordTestController {
     public String TestWord(){
         List<Word> word = wordRepository.findAllByWord_used();
 
-        System.out.println(word);
         try{
             JSONArray result = new JSONArray();
             for(int i = 0; i < word.size(); i++){
