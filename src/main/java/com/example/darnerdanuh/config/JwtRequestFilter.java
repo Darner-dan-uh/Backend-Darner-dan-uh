@@ -33,7 +33,8 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                     Arrays.asList(
                             "/register",
                             "/login",
-                            "/verifywithemail"
+                            "/verifywithemail",
+                            "/word/genre"
                     )
             );
 

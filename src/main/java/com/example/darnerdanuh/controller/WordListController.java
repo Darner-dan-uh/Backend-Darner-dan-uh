@@ -24,7 +24,9 @@ public class WordListController {
 
         List<Word> word = wordRepository.findByWord_id(wordDto.getWord_id());
         if(wordDto.getNumber() > word.size()){
-            return "wrong input";
+            JSONObject obj = new JSONObject();
+            obj.put("message", "wrong input");
+            return obj.toString();
         }
 
         try{
