@@ -11,6 +11,6 @@ public interface WordRepository extends JpaRepository<Word, Long> {
     @Query("select m from Word m where m.word_id = :word_id order by function('RAND') ")
     List<Word> findByWord_id(@Param("word_id") int word_id);
 
-    @Query(value = "SELECT * FROM word_test WHERE word_used=1 ORDER BY RAND()", nativeQuery = true)
+    @Query(value = "SELECT * FROM word WHERE word_used=1 ORDER BY RAND()", nativeQuery = true)
     List<Word> findAllByWord_used();
 }

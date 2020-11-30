@@ -1,14 +1,12 @@
 package com.example.darnerdanuh.domain.member;
 
+import com.example.darnerdanuh.domain.memo.Memo;
 import lombok.*;
 
 import javax.persistence.*;
 
 @Entity(name = "member")
 @Getter
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Member {
 
     @Id
@@ -50,4 +48,15 @@ public class Member {
 
         return this;
     }
+
+    public Member(){}
+
+    @Builder
+    public Member(String email, String name, String password, String userId){
+        this.email = email;
+        this.name = name;
+        this.password = password;
+        this.userId = userId;
+    }
+
 }
