@@ -1,6 +1,5 @@
 package com.example.darnerdanuh.domain.member;
 
-import com.example.darnerdanuh.domain.memo.Memo;
 import lombok.*;
 
 import javax.persistence.*;
@@ -55,7 +54,6 @@ public class Member {
         return this;
     }
 
-<<<<<<< HEAD
     public Member(){}
 
     @Builder
@@ -66,7 +64,6 @@ public class Member {
         this.userId = userId;
     }
 
-=======
     public Member learnedWordUpdate(int count){
         this.wordCnt += count;
 
@@ -78,5 +75,4 @@ public class Member {
 
         return this;
     }
->>>>>>> de210e84a63d45f6a13cc4cce16acd685670ad69
 }

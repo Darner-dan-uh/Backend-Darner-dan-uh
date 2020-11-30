@@ -34,4 +34,9 @@ public class MemberController {
     public String getRanking(@RequestParam(value = "count") int count){
         return rankingService.getRanking(count);
     }
+
+    @GetMapping("/myrank")
+    public String getRanking(@RequestParam(value = "id") String id){
+        return rankingService.getMyRanking(id);
+    }
 }

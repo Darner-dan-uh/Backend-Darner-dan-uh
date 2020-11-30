@@ -45,4 +45,19 @@ public class RankingService {
         }
     }
 
+    public String getMyRanking(String id){
+        List<Member> members = memberRepository.findAllByOrderByWordCntDesc();
+        String mem = memberRepository.findByUserIdToId(id);
+
+        JSONObject obj = new JSONObject();
+
+        for (int i=0;i<members.size();i++) {
+            if(members.get(i).getUserId().equals(mem)){
+                obj.put("rank", i + 1);
+                break;
+            }
+        }
+
+        return obj.toString();
+    }
 }
