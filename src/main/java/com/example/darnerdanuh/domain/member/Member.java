@@ -1,14 +1,12 @@
 package com.example.darnerdanuh.domain.member;
 
+import com.example.darnerdanuh.domain.memo.Memo;
 import lombok.*;
 
 import javax.persistence.*;
 
 @Entity(name = "member")
 @Getter
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Member {
 
     @Id
@@ -57,6 +55,18 @@ public class Member {
         return this;
     }
 
+<<<<<<< HEAD
+    public Member(){}
+
+    @Builder
+    public Member(String email, String name, String password, String userId){
+        this.email = email;
+        this.name = name;
+        this.password = password;
+        this.userId = userId;
+    }
+
+=======
     public Member learnedWordUpdate(int count){
         this.wordCnt += count;
 
@@ -68,4 +78,5 @@ public class Member {
 
         return this;
     }
+>>>>>>> de210e84a63d45f6a13cc4cce16acd685670ad69
 }

@@ -5,6 +5,7 @@ import com.example.darnerdanuh.domain.word.WordRepository;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,6 +14,7 @@ import java.util.List;
 @RestController
 public class WordTestController {
 
+    @Autowired
     WordRepository wordRepository;
 
     @GetMapping("/word/test")
