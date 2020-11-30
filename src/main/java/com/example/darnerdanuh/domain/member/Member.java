@@ -37,6 +37,12 @@ public class Member {
         return this;
     }
 
+    @Column(name = "word_cnt")
+    private int wordCnt = 0;
+
+    @Column(name = "stack_time")
+    private double stackTime = 0.0;
+
     public Member verifyCodeUpdate(String verifyCode) {
         this.verifyCode = verifyCode;
 
@@ -49,6 +55,7 @@ public class Member {
         return this;
     }
 
+<<<<<<< HEAD
     public Member(){}
 
     @Builder
@@ -59,4 +66,17 @@ public class Member {
         this.userId = userId;
     }
 
+=======
+    public Member learnedWordUpdate(int count){
+        this.wordCnt += count;
+
+        return this;
+    }
+
+    public Member learnedTimeUpdate(double time){
+        this.stackTime += time;
+
+        return this;
+    }
+>>>>>>> de210e84a63d45f6a13cc4cce16acd685670ad69
 }
