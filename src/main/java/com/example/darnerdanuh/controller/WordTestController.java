@@ -1,12 +1,18 @@
 package com.example.darnerdanuh.controller;
 
+import com.example.darnerdanuh.domain.member.Member;
+import com.example.darnerdanuh.domain.member.MemberRepository;
+import com.example.darnerdanuh.domain.member.SaveData;
 import com.example.darnerdanuh.domain.word.Word;
 import com.example.darnerdanuh.domain.word.WordRepository;
+import com.example.darnerdanuh.service.RankingService;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -16,6 +22,9 @@ public class WordTestController {
 
     @Autowired
     WordRepository wordRepository;
+
+    @Autowired
+    RankingService rankingService;
 
     @GetMapping("/word/test")
     public String TestWord(){
@@ -46,5 +55,10 @@ public class WordTestController {
         }catch (JSONException e){
             return e.getMessage();
         }
+    }
+
+    @PostMapping("/word/savedata")
+    public String SaveWordCount(@RequestBody SaveData data){
+        return rankingService.UpdateUserWordCount(data);
     }
 }

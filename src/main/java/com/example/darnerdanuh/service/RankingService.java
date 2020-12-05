@@ -2,6 +2,7 @@ package com.example.darnerdanuh.service;
 import com.example.darnerdanuh.domain.ResponseJson;
 import com.example.darnerdanuh.domain.member.Member;
 import com.example.darnerdanuh.domain.member.MemberRepository;
+import com.example.darnerdanuh.domain.member.SaveData;
 import com.example.darnerdanuh.domain.word.Word;
 import lombok.RequiredArgsConstructor;
 import org.json.JSONArray;
@@ -10,6 +11,8 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class RankingService {
@@ -48,6 +51,19 @@ public class RankingService {
                 break;
             }
         }
+        return obj.toString();
+    }
+
+    public String UpdateUserWordCount(SaveData data){
+        if(data.count < 0) {
+            return "{ \"message\" : \"wrong count\"}";
+        }
+
+        Optional<Member> member = memberRepository.findByUserId(data.getId());
+        memberRepository.save(member.get().learnedWordUpdate(data.count));
+        JSONObject obj = new JSONObject();
+        obj.put(member.get().getName(), member.get().getWordCnt());
+
         return obj.toString();
     }
 }
