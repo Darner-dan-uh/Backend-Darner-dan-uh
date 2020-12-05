@@ -1,4 +1,5 @@
 package com.example.darnerdanuh.service;
+import com.example.darnerdanuh.domain.ResponseJson;
 import com.example.darnerdanuh.domain.member.Member;
 import com.example.darnerdanuh.domain.member.MemberRepository;
 import com.example.darnerdanuh.domain.word.Word;
@@ -35,51 +36,6 @@ public class RankingService {
         }
     }
 
-<<<<<<< HEAD
-    public String getMyRanking(String id){
-=======
-    public String getRanking(int count){
->>>>>>> 0a3fd3c9f837ad00e1c4440489acde1c4e6fce01
-        List<Member> members = memberRepository.findAllByOrderByWordCntDesc();
-        String mem = memberRepository.findByUserIdToId(id);
-
-<<<<<<< HEAD
-        JSONObject obj = new JSONObject();
-
-        for (int i=0;i<members.size();i++) {
-            if(members.get(i).getUserId().equals(mem)){
-                obj.put("rank", i + 1);
-                break;
-            }
-        }
-
-        return obj.toString();
-    }
-}
-=======
-        if(count > members.size()){
-            return "wrong input";
-        }
-
-        try{
-            JSONArray result = new JSONArray();
-
-            for (int i = 0; i < count; i++) {
-                JSONObject obj = new JSONObject();
-                obj.put("name", members.get(i).getName());
-                obj.put("rank", i + 1);
-                result.put(obj);
-            }
-
-            JSONObject result_json = new JSONObject();
-            result_json.put("ranking", result);
-
-            return result_json.toString();
-        }catch (JSONException e){
-            return e.getMessage();
-        }
-    }
-
     public String getMyRanking(String id){
         List<Member> members = memberRepository.findAllByOrderByWordCntDesc();
         String mem = memberRepository.findByUserIdToId(id);
@@ -92,8 +48,6 @@ public class RankingService {
                 break;
             }
         }
-
         return obj.toString();
     }
 }
->>>>>>> 0a3fd3c9f837ad00e1c4440489acde1c4e6fce01
