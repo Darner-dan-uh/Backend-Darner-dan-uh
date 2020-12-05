@@ -14,5 +14,11 @@ public interface MemberRepository extends CrudRepository<Member, Long> {
     Optional<Member> findByUserId(String userId);
     Optional<Member> findByEmail(String email);
 
+    @Query("select m.name from member m where m.userId = :userId")
+    String findByUserIdToName(@Param("userId") String userId);
+
+    @Query("select m.userId from member m where m.userId = :userId")
+    String findByUserIdToId(@Param("userId") String userId);
+
     List<Member> findAllByOrderByWordCntDesc();
 }
