@@ -12,4 +12,5 @@ public class MemberDto {
     private String password;
     private boolean permitted;
     private boolean passwordVerify;
+    private int wordCnt;
 }

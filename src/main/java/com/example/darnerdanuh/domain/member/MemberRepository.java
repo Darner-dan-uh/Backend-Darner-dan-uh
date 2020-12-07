@@ -4,7 +4,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -19,6 +18,9 @@ public interface MemberRepository extends CrudRepository<Member, Long> {
 
     @Query("select m.userId from member m where m.userId = :userId")
     String findByUserIdToId(@Param("userId") String userId);
+
+    @Query("select m.wordCnt from member m where m.userId = :userId")
+    int findByUserIdToWordCnt(@Param("userId") String userId);
 
     List<Member> findAllByOrderByWordCntDesc();
 }

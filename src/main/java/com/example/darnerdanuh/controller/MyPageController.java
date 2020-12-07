@@ -24,8 +24,11 @@ public class MyPageController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private static Principal principal;
+
     @GetMapping("/user/profile")
-    public String getProfile(Principal principal){
+    public String getProfile(){
 
         String name = memberRepository.findByUserIdToName(principal.getName());
         String userId = memberRepository.findByUserIdToId(principal.getName());
@@ -39,7 +42,7 @@ public class MyPageController {
     }
 
     @PostMapping("/user/verifyPassword")
-    public ResponseEntity verifyPassword(@RequestBody MemberDto memberDto, Principal principal){
+    public ResponseEntity verifyPassword(@RequestBody MemberDto memberDto){
 
         Member member = memberRepository.findByUserId(principal.getName()).orElseThrow(RuntimeException::new);
 
@@ -47,24 +50,24 @@ public class MyPageController {
 
             memberRepository.save(member.passwordVerifyUpdate(true));
 
-            return new ResponseEntity<>(HttpStatus.OK);
+            return new ResponseEntity<String>("success",HttpStatus.OK);
         }
         else{
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<String>("bad request",HttpStatus.BAD_REQUEST);
         }
     }
 
-    @PatchMapping("/user/update")
+    @PostMapping("/user/update")
     public ResponseEntity updateProfile(@RequestBody MemberDto memberDto, Principal principal){
 
         Member member = memberRepository.findByUserId(principal.getName()).orElseThrow(RuntimeException::new);
 
-        if(!member.isPasswordVerify()) return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        //if(!member.isPasswordVerify()) return new ResponseEntity<String>("please verify email",HttpStatus.FORBIDDEN);
 
         memberRepository.save(member.nameUpdate(memberDto.getName()));
 
         memberRepository.save(member.passwordVerifyUpdate(false));
 
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<String>("success",HttpStatus.OK);
     }
 }

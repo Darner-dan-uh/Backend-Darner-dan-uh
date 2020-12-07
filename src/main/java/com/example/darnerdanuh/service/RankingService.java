@@ -62,7 +62,7 @@ public class RankingService {
         Optional<Member> member = memberRepository.findByUserId(data.getId());
         memberRepository.save(member.get().learnedWordUpdate(data.count));
         JSONObject obj = new JSONObject();
-        obj.put(member.get().getName(), member.get().getWordCnt());
+        obj.put("message", "success");
 
         return obj.toString();
     }
