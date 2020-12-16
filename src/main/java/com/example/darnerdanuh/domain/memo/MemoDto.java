@@ -11,7 +11,7 @@ public class MemoDto {
     String title;
     String content;
 
-    public Memo toEntity(Member userId, String title, String content){
+    public Memo toEntity(String userId, String title, String content){
         return Memo.builder()
                 .userId(userId)
                 .title(title)

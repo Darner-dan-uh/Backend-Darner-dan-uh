@@ -62,7 +62,7 @@ public class MyPageController {
 
         Member member = memberRepository.findByUserId(principal.getName()).orElseThrow(RuntimeException::new);
 
-        //if(!member.isPasswordVerify()) return new ResponseEntity<String>("please verify email",HttpStatus.FORBIDDEN);
+        if(!member.isPasswordVerify()) return new ResponseEntity<String>("please verify email",HttpStatus.FORBIDDEN);
 
         memberRepository.save(member.nameUpdate(memberDto.getName()));
 

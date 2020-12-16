@@ -12,11 +12,13 @@ public class Memo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "memo_id")
     private Long memoId;
 
-    @ManyToOne
-    @JoinColumn(name="userId", referencedColumnName = "user_id")
-    private Member userId;
+    //@ManyToOne
+    //@JoinColumn(name="userId", referencedColumnName = "user_id")
+    @Column(name = "user_id")
+    private String userId;
 
     @Column
     private String title;
@@ -26,8 +28,19 @@ public class Memo {
     public Memo(){}
 
 
+    public Memo titleUpdate(String title) {
+        this.title = title;
+        return this;
+    }
+
+    public Memo contentUpdate(String content) {
+        this.content = content;
+        return this;
+    }
+
+
     @Builder
-    public Memo(Member userId, String title, String content, boolean fixed){
+    public Memo(String userId, String title, String content, boolean fixed){
         this.userId = userId;
         this.title = title;
         this.content = content;
